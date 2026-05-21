@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Odd Numbers Build Squares — Ganita Prakash Grade 8</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#f5f4f0;--surface:#fff;--surface2:#f0ede8;--border:#d8d4cc;
+  --text:#1a1814;--text2:#5a5650;--text3:#9a958e;
+  --blue:#2c5f9e;--red:#c0392b;--green:#1a7a4a;--orange:#e08020;
+  --font:'DM Sans',-apple-system,sans-serif;--mono:'DM Mono',ui-monospace,monospace;
+}
+body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased;line-height:1.5}
+.page{max-width:860px;margin:0 auto;padding:28px 20px}
+.lbl{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);margin-bottom:5px}
+.title{font-size:22px;font-weight:700;margin-bottom:5px}
+.subtitle{font-size:14px;color:var(--text2);margin-bottom:22px;max-width:560px;line-height:1.5}
+.card{background:var(--surface);border:1.5px solid var(--border);border-radius:12px;padding:22px;margin-bottom:16px}
+.card-title{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--text3);margin-bottom:14px}
+
+/* Tabs */
+.tabs{display:flex;gap:4px;background:var(--surface2);border:1.5px solid var(--border);border-radius:10px;padding:4px;margin-bottom:20px}
+.tab{flex:1;padding:7px 0;text-align:center;font-size:13px;font-weight:500;color:var(--text2);border-radius:7px;cursor:pointer;border:none;background:none;font-family:var(--font);transition:all .12s}
+.tab.active{background:var(--surface);color:var(--text);box-shadow:0 1px 4px rgba(0,0,0,.08);border:1.5px solid var(--border)}
+
+/* Build tab layout */
+.build-layout{display:grid;grid-template-columns:auto 1fr;gap:22px;align-items:start}
+@media(max-width:580px){.build-layout{grid-template-columns:1fr}}
+
+/* Grid canvas */
+.canvas-wrap{background:var(--surface2);border:1.5px solid var(--border);border-radius:10px;padding:12px;display:flex;flex-direction:column;align-items:center;gap:12px}
+canvas#sqGrid{display:block;image-rendering:pixelated;border-radius:4px}
+.nav-row{display:flex;gap:8px}
+.btn{padding:7px 18px;border:1.5px solid var(--border);border-radius:8px;font-size:13px;font-weight:500;color:var(--text);background:var(--surface);cursor:pointer;font-family:var(--font);transition:all .12s}
+.btn:hover:not(:disabled){border-color:var(--text)}
+.btn:disabled{opacity:.35;cursor:not-allowed}
+.btn-add{background:var(--blue);border-color:var(--blue);color:#fff}
+.btn-add:hover:not(:disabled){background:#1a4a8a}
+
+/* Formula strip */
+.formula-strip{background:var(--surface2);border:1.5px solid var(--border);border-radius:9px;padding:10px 14px;text-align:center}
+.formula-main{font-family:var(--mono);font-size:14px;font-weight:700;color:var(--text);margin-bottom:2px}
+.formula-sub{font-size:12px;color:var(--text3)}
+
+/* Running sum list */
+.sum-list{display:flex;flex-direction:column;border-radius:10px;overflow:hidden;border:1.5px solid var(--border);max-height:380px;overflow-y:auto}
+.sum-row{display:flex;align-items:center;border-bottom:1px solid var(--border);transition:background .15s}
+.sum-row:last-child{border-bottom:none}
+.sum-row.active{background:#fffbeb}
+.sum-color-bar{width:5px;align-self:stretch;flex-shrink:0}
+.sum-inner{flex:1;padding:7px 12px;display:flex;align-items:center;gap:8px}
+.sum-odd{font-family:var(--mono);font-size:16px;font-weight:700;min-width:28px;text-align:right}
+.sum-arrow{font-size:12px;color:var(--text3)}
+.sum-running{font-family:var(--mono);font-size:16px;font-weight:700;color:var(--text)}
+.sum-n{font-size:11px;color:var(--text3);margin-left:auto;padding-right:12px;font-family:var(--mono)}
+
+/* Test tab */
+.test-layout{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:560px){.test-layout{grid-template-columns:1fr}}
+.inp-group{display:flex;flex-direction:column;gap:4px;margin-bottom:12px}
+.inp-group label{font-size:12px;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:.04em}
+.inp-group input{padding:8px 14px;border:1.5px solid var(--border);border-radius:8px;font-family:var(--mono);font-size:20px;font-weight:700;background:var(--surface);color:var(--text);outline:none;text-align:center}
+.inp-group input:focus{border-color:var(--blue)}
+.preset-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.preset-lbl{font-size:12px;color:var(--text3);font-weight:500;align-self:center}
+.psc{padding:4px 11px;border:1.5px solid var(--border);border-radius:7px;font-family:var(--mono);font-size:12.5px;font-weight:500;background:var(--surface);color:var(--text2);cursor:pointer}
+.psc:hover{border-color:var(--blue);color:var(--blue)}
+.steps-list{display:flex;flex-direction:column;gap:6px}
+.step-card{display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:8px;border:1.5px solid;font-size:13.5px;font-family:var(--mono);font-weight:600}
+.step-card.ok{background:#f0fdf4;border-color:#86efac;color:#15803d}
+.step-card.over{background:#fff5f5;border-color:#fca5a5;color:#dc2626}
+.step-card .sc-note{margin-left:auto;font-size:11.5px;opacity:.8}
+.test-result{border-radius:9px;padding:10px 14px;text-align:center;font-size:14px;font-weight:600;border:1.5px solid;margin-top:4px}
+.test-result.yes{background:#f0fdf4;border-color:#86efac;color:#15803d}
+.test-result.no{background:#fff5f5;border-color:#fca5a5;color:#dc2626}
+.insight{background:#fff8f0;border:1.5px solid #f0d8c0;border-radius:10px;padding:13px 18px;font-size:13.5px;color:#6b4400;line-height:1.65}
+.insight strong{color:#a05000}
+.insight .eq{font-family:var(--mono);font-size:13px;display:block;margin:2px 0}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="lbl">Chapter 1 · A Square and A Cube</div>
+  <div class="title">Odd Numbers Build Squares</div>
+  <div class="subtitle">The sum of the first n odd numbers always equals n². Each new odd number adds a coloured L-shaped border — watch the square grow.</div>
+
+  <div class="card">
+    <div class="tabs">
+      <button class="tab active" id="t0" onclick="switchTab(0)">Build a square</button>
+      <button class="tab" id="t1" onclick="switchTab(1)">Test a number</button>
+    </div>
+
+    <!-- BUILD -->
+    <div id="v0">
+      <div class="build-layout">
+        <div class="canvas-wrap">
+          <canvas id="sqGrid"></canvas>
+          <div class="nav-row">
+            <button class="btn" id="btnBack" disabled onclick="changeN(-1)">← Remove</button>
+            <button class="btn btn-add" id="btnAdd" onclick="changeN(1)">Add next odd</button>
+            <button class="btn" onclick="resetBuild()">Reset</button>
+          </div>
+          <div class="formula-strip">
+            <div class="formula-main" id="fMain">1 = 1²</div>
+            <div class="formula-sub" id="fSub">Sum of first 1 odd number = 1</div>
+          </div>
+        </div>
+        <div class="sum-list" id="sumList"></div>
+      </div>
+      <div class="insight" style="margin-top:14px">
+        <strong>Why does this work?</strong> Each new odd number (2n−1) forms an L-shaped border — a top row and a right column — that wraps around the previous square. Adding 2n−1 cells to (n−1)² gives exactly n².
+        <span class="eq">1 + 3 + 5 + … + (2n−1) = n²</span>
+      </div>
+    </div>
+
+    <!-- TEST -->
+    <div id="v1" style="display:none">
+      <div class="test-layout">
+        <div>
+          <div class="inp-group">
+            <label>Number to test</label>
+            <input type="number" id="testIn" value="25" min="1">
+          </div>
+          <button class="btn btn-add" onclick="runTest()" style="width:100%;margin-bottom:12px">Subtract consecutive odds</button>
+          <div class="preset-row">
+            <span class="preset-lbl">Try:</span>
+            <button class="psc" onclick="setAndTest(25)">25</button>
+            <button class="psc" onclick="setAndTest(81)">81</button>
+            <button class="psc" onclick="setAndTest(38)">38</button>
+            <button class="psc" onclick="setAndTest(144)">144</button>
+            <button class="psc" onclick="setAndTest(57)">57</button>
+          </div>
+          <div class="insight">
+            If subtracting 1, 3, 5, 7… lands on exactly 0, it is a perfect square (we subtracted n odds, so it equals n²). If we overshoot 0, it is not.
+          </div>
+        </div>
+        <div>
+          <div class="steps-list" id="stepsList"><span style="font-size:13px;color:var(--text3)">Enter a number and press the button.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const COLORS=['#2c5f9e','#c0392b','#1a7a4a','#e08020','#7c3aed','#0891b2','#c0392b','#1a7a4a','#d97706','#0e7490','#1d4ed8','#065f46'];
+let n=1;
+
+const cvs=document.getElementById('sqGrid');
+const ctx=cvs.getContext('2d');
+const CELL=26,GAP=2;
+
+function drawGrid(){
+  const size=n*(CELL+GAP)-GAP;
+  cvs.width=size; cvs.height=size;
+  cvs.style.width=size+'px'; cvs.style.height=size+'px';
+  ctx.clearRect(0,0,size,size);
+  for(let row=0;row<n;row++){
+    for(let col=0;col<n;col++){
+      const layer=Math.max(row,col);
+      const color=COLORS[layer%COLORS.length];
+      const x=col*(CELL+GAP), y=row*(CELL+GAP);
+      ctx.fillStyle=color+'dd';
+      ctx.beginPath();
+      if(ctx.roundRect) ctx.roundRect(x,y,CELL,CELL,3);
+      else ctx.rect(x,y,CELL,CELL);
+      ctx.fill();
+      ctx.strokeStyle=color;
+      ctx.lineWidth=1;
+      ctx.stroke();
+    }
+  }
+}
+
+function buildSumList(){
+  const list=document.getElementById('sumList');
+  list.innerHTML='';
+  let running=0;
+  for(let i=1;i<=n;i++){
+    const odd=2*i-1;
+    running+=odd;
+    const isLast=i===n;
+    const color=COLORS[(i-1)%COLORS.length];
+    const row=document.createElement('div');
+    row.className='sum-row'+(isLast?' active':'');
+    row.innerHTML=`
+      <div class="sum-color-bar" style="background:${color}"></div>
+      <div class="sum-inner">
+        <span class="sum-odd" style="color:${color}">${odd}</span>
+        <span class="sum-arrow">${i===1?'=':'+  ='}</span>
+        <span class="sum-running" style="color:${isLast?color:'var(--text3)'}">${running}</span>
+      </div>
+      <span class="sum-n">${i}²</span>`;
+    list.appendChild(row);
+  }
+  list.scrollTop=list.scrollHeight;
+}
+
+function updateFormula(){
+  const parts=[];
+  for(let i=1;i<=n;i++) parts.push(2*i-1);
+  document.getElementById('fMain').textContent=`${parts.join(' + ')} = ${n}² = ${n*n}`;
+  document.getElementById('fSub').textContent=`Sum of first ${n} odd number${n!==1?'s':''} = ${n}²`;
+  document.getElementById('btnBack').disabled=n<=1;
+  document.getElementById('btnAdd').disabled=n>=12;
+}
+
+function changeN(d){n=Math.max(1,Math.min(12,n+d));drawGrid();buildSumList();updateFormula();}
+function resetBuild(){n=1;drawGrid();buildSumList();updateFormula();}
+
+function runTest(){
+  const num=parseInt(document.getElementById('testIn').value)||1;
+  const list=document.getElementById('stepsList');
+  list.innerHTML='';
+  let rem=num,odd=1;
+  const steps=[];
+  while(rem>0){
+    const next=rem-odd;
+    steps.push({odd,prev:rem,next:Math.max(next,0),over:next<0});
+    if(next<=0) break;
+    rem=next; odd+=2;
+  }
+  const isSquare=steps[steps.length-1].next===0&&!steps[steps.length-1].over;
+  steps.forEach(s=>{
+    const div=document.createElement('div');
+    div.className='step-card '+(s.over?'over':'ok');
+    div.innerHTML=`<span>${s.prev}</span><span style="opacity:.5">−</span><span>${s.odd}</span><span style="opacity:.4">=</span><span>${s.next}</span><span class="sc-note">${s.over?'overshot!':s.next===0?'reached 0':'continue'}</span>`;
+    list.appendChild(div);
+  });
+  const res=document.createElement('div');
+  if(isSquare){
+    const root=Math.round(Math.sqrt(num));
+    res.className='test-result yes';
+    res.textContent=`${num} is a perfect square — ${num} = ${root}²`;
+  } else {
+    res.className='test-result no';
+    res.textContent=`${num} is not a perfect square (overshot 0)`;
+  }
+  list.appendChild(res);
+}
+
+window.setAndTest=v=>{document.getElementById('testIn').value=v;runTest();};
+
+function switchTab(i){
+  ['t0','t1'].forEach((id,j)=>{document.getElementById(id).classList.toggle('active',j===i);document.getElementById('v'+j).style.display=j===i?'block':'none';});
+}
+
+drawGrid();buildSumList();updateFormula();
+</script>
+</body>
+</html>
