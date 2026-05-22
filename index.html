@@ -5,104 +5,187 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>Odd Numbers Build Squares — Ganita Prakash Grade 8</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Mono:wght@400;500;600&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#f5f4f0;--surface:#fff;--surface2:#f0ede8;--border:#d8d4cc;
-  --text:#1a1814;--text2:#5a5650;--text3:#9a958e;
-  --blue:#2c5f9e;--red:#c0392b;--green:#1a7a4a;--orange:#e08020;
-  --font:'DM Sans',-apple-system,sans-serif;--mono:'DM Mono',ui-monospace,monospace;
+  --paper:  #faf8f4;  --paper2: #f3f0ea;  --paper3: #e8e3d8;
+  --ink:    #1c1a16;  --ink2:   #4a4640;  --ink3:   #8a8580;
+  --rule:   #d4cfc5;
+  --teal:   #1d6a72;  --teal2:  #2a8a94;  --teal-bg:#e8f4f5;
+  --rust:   #b84a2a;  --rust-bg:#fdf0ec;
+  --gold:   #c08030;  --gold-bg:#fdf5e8;
+  --sage:   #3a6a48;  --sage-bg:#eaf2ec;
+  --violet: #6a4a90;  --violet-bg:#f2eef8;
+  --font:  'DM Sans', sans-serif;
+  --serif: 'Lora', Georgia, serif;
+  --mono:  'DM Mono', ui-monospace, monospace;
+  --shadow: 0 2px 12px rgba(28,26,22,.08);
 }
-body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased;line-height:1.5}
-.page{max-width:860px;margin:0 auto;padding:28px 20px}
-.lbl{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);margin-bottom:5px}
-.title{font-size:22px;font-weight:700;margin-bottom:5px}
-.subtitle{font-size:14px;color:var(--text2);margin-bottom:22px;max-width:560px;line-height:1.5}
-.card{background:var(--surface);border:1.5px solid var(--border);border-radius:12px;padding:22px;margin-bottom:16px}
-.card-title{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--text3);margin-bottom:14px}
+body{
+  font-family:var(--font);background:var(--paper);color:var(--ink);
+  min-height:100vh;-webkit-font-smoothing:antialiased;padding:32px 20px 60px;line-height:1.6;
+  background-image:
+    radial-gradient(circle at 20% 30%,rgba(192,128,48,.04) 0,transparent 50%),
+    radial-gradient(circle at 80% 70%,rgba(29,106,114,.04) 0,transparent 50%);
+}
+.app{max-width:860px;margin:0 auto}
 
-/* Tabs */
-.tabs{display:flex;gap:4px;background:var(--surface2);border:1.5px solid var(--border);border-radius:10px;padding:4px;margin-bottom:20px}
-.tab{flex:1;padding:7px 0;text-align:center;font-size:13px;font-weight:500;color:var(--text2);border-radius:7px;cursor:pointer;border:none;background:none;font-family:var(--font);transition:all .12s}
-.tab.active{background:var(--surface);color:var(--text);box-shadow:0 1px 4px rgba(0,0,0,.08);border:1.5px solid var(--border)}
+/* ── HEADER ── */
+.header{margin-bottom:24px;padding-bottom:18px;border-bottom:1.5px solid var(--rule)}
+.chapter-badge{display:inline-flex;align-items:center;gap:8px;background:var(--paper2);border:1.5px solid var(--rule);border-radius:20px;padding:4px 14px 4px 10px;font-size:11px;font-weight:600;letter-spacing:.6px;text-transform:uppercase;color:var(--ink3);margin-bottom:12px}
+.badge-num{width:22px;height:22px;border-radius:50%;background:var(--teal);color:#fff;font-size:12px;font-weight:700;font-family:var(--mono);display:flex;align-items:center;justify-content:center}
+h1{font-family:var(--serif);font-size:26px;font-weight:700;color:var(--ink);letter-spacing:-.3px;line-height:1.2;margin-bottom:5px}
+.header-sub{font-size:14px;color:var(--ink2);max-width:560px;line-height:1.55}
 
-/* Build tab layout */
-.build-layout{display:grid;grid-template-columns:auto 1fr;gap:22px;align-items:start}
+.card{background:var(--paper);border:1.5px solid var(--rule);border-radius:14px;padding:24px;margin-bottom:18px;box-shadow:var(--shadow)}
+
+/* ── TABS ── */
+.tabs{display:flex;gap:3px;background:var(--paper2);border:1.5px solid var(--rule);border-radius:12px;padding:4px;margin-bottom:24px}
+.tab{flex:1;padding:10px;border:none;background:transparent;border-radius:9px;font-family:var(--font);font-size:13px;font-weight:600;color:var(--ink3);cursor:pointer;transition:all .18s;text-align:center}
+.tab:hover{color:var(--ink2)}
+.tab.active{background:#fff;color:var(--ink);box-shadow:0 1px 4px rgba(28,26,22,.10);border:1.5px solid var(--rule)}
+.view{display:none}.view.active{display:block}
+
+/* ── CONCEPT BANNER ── */
+.concept{background:var(--gold-bg);border-left:3px solid var(--gold);border-radius:0 8px 8px 0;padding:12px 16px;margin-bottom:22px;font-family:var(--serif);font-style:italic;font-size:14px;color:#4a3010;line-height:1.65}
+.concept strong{font-style:normal;font-weight:700;color:#3a2008}
+
+/* ── BUILD TAB ── */
+.build-layout{display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:start}
 @media(max-width:580px){.build-layout{grid-template-columns:1fr}}
 
-/* Grid canvas */
-.canvas-wrap{background:var(--surface2);border:1.5px solid var(--border);border-radius:10px;padding:12px;display:flex;flex-direction:column;align-items:center;gap:12px}
+.canvas-wrap{background:var(--paper2);border:1.5px solid var(--rule);border-radius:12px;padding:14px;display:flex;flex-direction:column;align-items:center;gap:12px}
 canvas#sqGrid{display:block;image-rendering:pixelated;border-radius:4px}
-.nav-row{display:flex;gap:8px}
-.btn{padding:7px 18px;border:1.5px solid var(--border);border-radius:8px;font-size:13px;font-weight:500;color:var(--text);background:var(--surface);cursor:pointer;font-family:var(--font);transition:all .12s}
-.btn:hover:not(:disabled){border-color:var(--text)}
+
+.nav-row{display:flex;gap:7px}
+.btn{padding:7px 16px;border:1.5px solid var(--rule);border-radius:8px;font-size:13px;font-weight:600;color:var(--ink2);background:var(--paper);cursor:pointer;font-family:var(--font);transition:all .12s}
+.btn:hover:not(:disabled){border-color:var(--ink3);color:var(--ink)}
 .btn:disabled{opacity:.35;cursor:not-allowed}
-.btn-add{background:var(--blue);border-color:var(--blue);color:#fff}
-.btn-add:hover:not(:disabled){background:#1a4a8a}
+.btn-add{background:var(--teal);border-color:var(--teal);color:#fff}
+.btn-add:hover:not(:disabled){background:#155a62;border-color:#155a62;color:#fff}
 
-/* Formula strip */
-.formula-strip{background:var(--surface2);border:1.5px solid var(--border);border-radius:9px;padding:10px 14px;text-align:center}
-.formula-main{font-family:var(--mono);font-size:14px;font-weight:700;color:var(--text);margin-bottom:2px}
-.formula-sub{font-size:12px;color:var(--text3)}
+.formula-strip{background:var(--paper2);border:1.5px solid var(--rule);border-radius:9px;padding:10px 14px;text-align:center;width:100%}
+.formula-main{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--ink);margin-bottom:2px;word-break:break-all}
+.formula-sub{font-size:12px;color:var(--ink3)}
 
-/* Running sum list */
-.sum-list{display:flex;flex-direction:column;border-radius:10px;overflow:hidden;border:1.5px solid var(--border);max-height:380px;overflow-y:auto}
-.sum-row{display:flex;align-items:center;border-bottom:1px solid var(--border);transition:background .15s}
+.sum-list{display:flex;flex-direction:column;border-radius:10px;overflow:hidden;border:1.5px solid var(--rule);max-height:360px;overflow-y:auto}
+.sum-row{display:flex;align-items:center;border-bottom:1px solid var(--rule);transition:background .15s}
 .sum-row:last-child{border-bottom:none}
-.sum-row.active{background:#fffbeb}
+.sum-row.active{background:#fdf5e8}
 .sum-color-bar{width:5px;align-self:stretch;flex-shrink:0}
 .sum-inner{flex:1;padding:7px 12px;display:flex;align-items:center;gap:8px}
-.sum-odd{font-family:var(--mono);font-size:16px;font-weight:700;min-width:28px;text-align:right}
-.sum-arrow{font-size:12px;color:var(--text3)}
-.sum-running{font-family:var(--mono);font-size:16px;font-weight:700;color:var(--text)}
-.sum-n{font-size:11px;color:var(--text3);margin-left:auto;padding-right:12px;font-family:var(--mono)}
+.sum-odd{font-family:var(--mono);font-size:15px;font-weight:700;min-width:28px;text-align:right}
+.sum-arrow{font-size:12px;color:var(--ink3)}
+.sum-running{font-family:var(--mono);font-size:15px;font-weight:700}
+.sum-n{font-size:11px;color:var(--ink3);margin-left:auto;padding-right:12px;font-family:var(--mono)}
 
-/* Test tab */
-.test-layout{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-@media(max-width:560px){.test-layout{grid-template-columns:1fr}}
-.inp-group{display:flex;flex-direction:column;gap:4px;margin-bottom:12px}
-.inp-group label{font-size:12px;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:.04em}
-.inp-group input{padding:8px 14px;border:1.5px solid var(--border);border-radius:8px;font-family:var(--mono);font-size:20px;font-weight:700;background:var(--surface);color:var(--text);outline:none;text-align:center}
-.inp-group input:focus{border-color:var(--blue)}
-.preset-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
-.preset-lbl{font-size:12px;color:var(--text3);font-weight:500;align-self:center}
-.psc{padding:4px 11px;border:1.5px solid var(--border);border-radius:7px;font-family:var(--mono);font-size:12.5px;font-weight:500;background:var(--surface);color:var(--text2);cursor:pointer}
-.psc:hover{border-color:var(--blue);color:var(--blue)}
-.steps-list{display:flex;flex-direction:column;gap:6px}
-.step-card{display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:8px;border:1.5px solid;font-size:13.5px;font-family:var(--mono);font-weight:600}
-.step-card.ok{background:#f0fdf4;border-color:#86efac;color:#15803d}
-.step-card.over{background:#fff5f5;border-color:#fca5a5;color:#dc2626}
-.step-card .sc-note{margin-left:auto;font-size:11.5px;opacity:.8}
-.test-result{border-radius:9px;padding:10px 14px;text-align:center;font-size:14px;font-weight:600;border:1.5px solid;margin-top:4px}
-.test-result.yes{background:#f0fdf4;border-color:#86efac;color:#15803d}
-.test-result.no{background:#fff5f5;border-color:#fca5a5;color:#dc2626}
-.insight{background:#fff8f0;border:1.5px solid #f0d8c0;border-radius:10px;padding:13px 18px;font-size:13.5px;color:#6b4400;line-height:1.65}
-.insight strong{color:#a05000}
-.insight .eq{font-family:var(--mono);font-size:13px;display:block;margin:2px 0}
+/* ── INSIGHT ── */
+.insight{background:var(--gold-bg);border:1px solid #e0c080;border-left:3px solid var(--gold);border-radius:0 8px 8px 0;padding:12px 15px;font-size:13px;color:#6b4400;line-height:1.65;margin-top:16px}
+.insight strong{color:#4a2e00}
+
+/* ════════════════════════════════════════
+   TEST TAB — active subtraction game
+════════════════════════════════════════ */
+.test-layout{display:grid;grid-template-columns:260px 1fr;gap:20px;align-items:start}
+@media(max-width:620px){.test-layout{grid-template-columns:1fr}}
+
+/* Number picker */
+.picker-card{background:#fff;border:1.5px solid var(--rule);border-radius:11px;padding:16px}
+.picker-lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--ink3);margin-bottom:8px}
+.num-input{width:100%;padding:10px 14px;border:1.5px solid var(--rule);border-radius:9px;font-family:var(--mono);font-size:26px;font-weight:700;background:var(--paper);color:var(--ink);outline:none;text-align:center;transition:border-color .15s;margin-bottom:10px}
+.num-input:focus{border-color:var(--teal)}
+.presets{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:12px}
+.preset{padding:4px 11px;border:1.5px solid var(--rule);border-radius:20px;font-family:var(--mono);font-size:12px;font-weight:600;color:var(--ink2);cursor:pointer;background:var(--paper);transition:all .12s}
+.preset:hover{border-color:var(--teal);color:var(--teal)}
+.start-btn{width:100%;padding:10px;background:var(--teal);border:none;border-radius:9px;color:#fff;font-family:var(--font);font-size:14px;font-weight:700;cursor:pointer;transition:all .14s;letter-spacing:.2px}
+.start-btn:hover{background:#155a62}
+
+/* The game area */
+.game-area{display:flex;flex-direction:column;gap:10px}
+
+/* Completed steps list */
+.steps-done{display:flex;flex-direction:column;gap:4px;max-height:240px;overflow-y:auto}
+.step-done{display:flex;align-items:center;gap:8px;padding:7px 12px;border-radius:8px;font-family:var(--mono);font-size:13px;font-weight:600;border:1.5px solid}
+.step-done.correct{background:var(--sage-bg);border-color:#8abcaa;color:var(--sage)}
+.step-done.wrong-hist{background:var(--rust-bg);border-color:#e0a898;color:var(--rust)}
+.step-done .sd-eq{flex:1}
+.step-done .sd-tag{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;opacity:.7}
+
+/* Active input row */
+.active-row{background:#fff;border:2px solid var(--teal);border-radius:11px;padding:16px;display:flex;flex-direction:column;gap:12px}
+.active-prompt{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.ap-num{font-family:var(--mono);font-size:28px;font-weight:800;color:var(--ink)}
+.ap-minus{font-size:22px;color:var(--ink3);font-weight:700}
+.ap-odd{font-family:var(--mono);font-size:28px;font-weight:800;color:var(--teal)}
+.ap-eq{font-size:22px;color:var(--ink3);font-weight:700}
+.ap-step-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--ink3);margin-left:auto}
+
+.answer-row{display:flex;gap:8px;align-items:center}
+.answer-input{flex:1;padding:10px 14px;border:2px solid var(--rule);border-radius:9px;font-family:var(--mono);font-size:24px;font-weight:700;text-align:center;color:var(--ink);background:var(--paper);outline:none;transition:all .18s}
+.answer-input:focus{border-color:var(--teal);background:#fff}
+.answer-input.shake{animation:shake .35s ease}
+.answer-input.wrong-border{border-color:var(--rust)!important}
+.check-btn{padding:10px 20px;background:var(--teal);border:none;border-radius:9px;color:#fff;font-family:var(--font);font-size:14px;font-weight:700;cursor:pointer;white-space:nowrap;transition:all .14s}
+.check-btn:hover{background:#155a62}
+
+.hint-text{font-size:12px;color:var(--ink3);font-style:italic}
+.hint-text.wrong-hint{color:var(--rust);font-style:normal;font-weight:600}
+
+@keyframes shake{
+  0%,100%{transform:translateX(0)}
+  20%{transform:translateX(-6px)}
+  40%{transform:translateX(6px)}
+  60%{transform:translateX(-4px)}
+  80%{transform:translateX(4px)}
+}
+
+/* Result card */
+.result-card{padding:20px;border-radius:11px;border:2px solid;text-align:center}
+.result-card.perfect{background:var(--sage-bg);border-color:#8abcaa}
+.result-card.not-square{background:var(--rust-bg);border-color:#e0a898}
+.rc-icon{font-size:36px;margin-bottom:8px}
+.rc-title{font-family:var(--serif);font-size:20px;font-weight:700;margin-bottom:6px}
+.result-card.perfect .rc-title{color:var(--sage)}
+.result-card.not-square .rc-title{color:var(--rust)}
+.rc-body{font-size:13px;line-height:1.6;margin-bottom:14px}
+.result-card.perfect .rc-body{color:#2a4a30}
+.result-card.not-square .rc-body{color:#5a2010}
+.try-again-btn{padding:8px 20px;border-radius:8px;border:1.5px solid var(--rule);background:var(--paper);font-family:var(--font);font-size:13px;font-weight:600;color:var(--ink2);cursor:pointer;transition:all .12s}
+.try-again-btn:hover{border-color:var(--ink3);color:var(--ink)}
+
+/* Empty state */
+.empty-state{text-align:center;padding:40px 20px;color:var(--ink3);font-size:14px;font-family:var(--serif);font-style:italic}
 </style>
 </head>
 <body>
-<div class="page">
-  <div class="lbl">Chapter 1 · A Square and A Cube</div>
-  <div class="title">Odd Numbers Build Squares</div>
-  <div class="subtitle">The sum of the first n odd numbers always equals n². Each new odd number adds a coloured L-shaped border — watch the square grow.</div>
+<div class="app">
+
+  <div class="header">
+    <div class="chapter-badge"><div class="badge-num">1</div>Chapter 1 · A Square and A Cube</div>
+    <h1>Odd Numbers Build Squares</h1>
+    <p class="header-sub">The sum of the first n odd numbers always equals n². Build the square visually, then test a number by subtracting consecutive odds yourself.</p>
+  </div>
 
   <div class="card">
     <div class="tabs">
-      <button class="tab active" id="t0" onclick="switchTab(0)">Build a square</button>
-      <button class="tab" id="t1" onclick="switchTab(1)">Test a number</button>
+      <button class="tab active" data-tab="build">Build a square</button>
+      <button class="tab" data-tab="test">Test a number</button>
     </div>
 
-    <!-- BUILD -->
-    <div id="v0">
+    <!-- ═══ BUILD TAB ═══ -->
+    <div class="view active" id="view-build">
+      <div class="concept">
+        <strong>Watch the pattern:</strong> Each odd number (1, 3, 5, 7…) wraps around the previous square as an L-shaped ring. Add them up and you always land on a perfect square.
+      </div>
+
       <div class="build-layout">
         <div class="canvas-wrap">
           <canvas id="sqGrid"></canvas>
           <div class="nav-row">
-            <button class="btn" id="btnBack" disabled onclick="changeN(-1)">← Remove</button>
-            <button class="btn btn-add" id="btnAdd" onclick="changeN(1)">Add next odd</button>
-            <button class="btn" onclick="resetBuild()">Reset</button>
+            <button class="btn" id="btnBack" disabled>← Remove</button>
+            <button class="btn btn-add" id="btnAdd">Add next odd</button>
+            <button class="btn" id="btnReset">Reset</button>
           </div>
           <div class="formula-strip">
             <div class="formula-main" id="fMain">1 = 1²</div>
@@ -111,145 +194,285 @@ canvas#sqGrid{display:block;image-rendering:pixelated;border-radius:4px}
         </div>
         <div class="sum-list" id="sumList"></div>
       </div>
-      <div class="insight" style="margin-top:14px">
-        <strong>Why does this work?</strong> Each new odd number (2n−1) forms an L-shaped border — a top row and a right column — that wraps around the previous square. Adding 2n−1 cells to (n−1)² gives exactly n².
-        <span class="eq">1 + 3 + 5 + … + (2n−1) = n²</span>
+
+      <div class="insight">
+        <strong>Why?</strong> Adding the (n+1)-th odd number, 2n+1, wraps a new top row and right column around the n×n square — exactly (n+1)² − n² = 2n+1 new cells. So each step produces the next perfect square.
       </div>
     </div>
 
-    <!-- TEST -->
-    <div id="v1" style="display:none">
+    <!-- ═══ TEST TAB ═══ -->
+    <div class="view" id="view-test">
+      <div class="concept">
+        <strong>Do the subtraction yourself.</strong> A number is a perfect square if and only if subtracting 1, 3, 5, 7… eventually reaches exactly 0. Each step you type the answer — the widget tells you if you're right.
+      </div>
+
       <div class="test-layout">
-        <div>
-          <div class="inp-group">
-            <label>Number to test</label>
-            <input type="number" id="testIn" value="25" min="1">
+        <!-- Left: picker -->
+        <div class="picker-card">
+          <div class="picker-lbl">Choose a number to test</div>
+          <input type="number" class="num-input" id="testIn" value="25" min="1" max="9999">
+          <div class="presets">
+            <button class="preset" data-n="25">25</button>
+            <button class="preset" data-n="36">36</button>
+            <button class="preset" data-n="38">38</button>
+            <button class="preset" data-n="81">81</button>
+            <button class="preset" data-n="57">57</button>
+            <button class="preset" data-n="144">144</button>
           </div>
-          <button class="btn btn-add" onclick="runTest()" style="width:100%;margin-bottom:12px">Subtract consecutive odds</button>
-          <div class="preset-row">
-            <span class="preset-lbl">Try:</span>
-            <button class="psc" onclick="setAndTest(25)">25</button>
-            <button class="psc" onclick="setAndTest(81)">81</button>
-            <button class="psc" onclick="setAndTest(38)">38</button>
-            <button class="psc" onclick="setAndTest(144)">144</button>
-            <button class="psc" onclick="setAndTest(57)">57</button>
-          </div>
-          <div class="insight">
-            If subtracting 1, 3, 5, 7… lands on exactly 0, it is a perfect square (we subtracted n odds, so it equals n²). If we overshoot 0, it is not.
-          </div>
+          <button class="start-btn" id="startBtn">Start subtracting →</button>
         </div>
-        <div>
-          <div class="steps-list" id="stepsList"><span style="font-size:13px;color:var(--text3)">Enter a number and press the button.</span></div>
+
+        <!-- Right: game -->
+        <div class="game-area" id="gameArea">
+          <div class="empty-state" id="emptyState">Pick a number and press Start to begin.</div>
         </div>
       </div>
     </div>
+
   </div>
 </div>
 
 <script>
-const COLORS=['#2c5f9e','#c0392b','#1a7a4a','#e08020','#7c3aed','#0891b2','#c0392b','#1a7a4a','#d97706','#0e7490','#1d4ed8','#065f46'];
-let n=1;
+// ══════════════════════════════════════════════════════
+// TABS
+// ══════════════════════════════════════════════════════
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('view-' + tab.dataset.tab).classList.add('active');
+  });
+});
 
-const cvs=document.getElementById('sqGrid');
-const ctx=cvs.getContext('2d');
-const CELL=26,GAP=2;
+// ══════════════════════════════════════════════════════
+// BUILD TAB
+// ══════════════════════════════════════════════════════
+const COLORS = [
+  '#1d6a72','#b84a2a','#c08030','#3a6a48','#6a4a90','#2a5a8a','#a83060',
+  '#1d6a72','#b84a2a','#c08030','#3a6a48','#6a4a90',
+];
+let n = 1;
+const cvs = document.getElementById('sqGrid');
+const ctx  = cvs.getContext('2d');
+const CELL = 26, GAP = 2;
 
 function drawGrid(){
-  const size=n*(CELL+GAP)-GAP;
-  cvs.width=size; cvs.height=size;
-  cvs.style.width=size+'px'; cvs.style.height=size+'px';
-  ctx.clearRect(0,0,size,size);
-  for(let row=0;row<n;row++){
-    for(let col=0;col<n;col++){
-      const layer=Math.max(row,col);
-      const color=COLORS[layer%COLORS.length];
-      const x=col*(CELL+GAP), y=row*(CELL+GAP);
-      ctx.fillStyle=color+'dd';
+  const size = n*(CELL+GAP)-GAP;
+  cvs.width = size; cvs.height = size;
+  cvs.style.width = size+'px'; cvs.style.height = size+'px';
+  ctx.clearRect(0, 0, size, size);
+  for(let row=0; row<n; row++){
+    for(let col=0; col<n; col++){
+      const layer = Math.max(row, col);
+      const color = COLORS[layer % COLORS.length];
+      const x = col*(CELL+GAP), y = row*(CELL+GAP);
+      ctx.fillStyle = color+'dd';
       ctx.beginPath();
-      if(ctx.roundRect) ctx.roundRect(x,y,CELL,CELL,3);
-      else ctx.rect(x,y,CELL,CELL);
+      if(ctx.roundRect) ctx.roundRect(x, y, CELL, CELL, 3);
+      else ctx.rect(x, y, CELL, CELL);
       ctx.fill();
-      ctx.strokeStyle=color;
-      ctx.lineWidth=1;
-      ctx.stroke();
     }
   }
 }
 
 function buildSumList(){
-  const list=document.getElementById('sumList');
-  list.innerHTML='';
-  let running=0;
-  for(let i=1;i<=n;i++){
-    const odd=2*i-1;
-    running+=odd;
-    const isLast=i===n;
-    const color=COLORS[(i-1)%COLORS.length];
-    const row=document.createElement('div');
-    row.className='sum-row'+(isLast?' active':'');
-    row.innerHTML=`
+  const list = document.getElementById('sumList');
+  list.innerHTML = '';
+  let running = 0;
+  for(let i=1; i<=n; i++){
+    const odd  = 2*i-1;
+    running   += odd;
+    const isLast = i === n;
+    const color  = COLORS[(i-1) % COLORS.length];
+    const row = document.createElement('div');
+    row.className = 'sum-row' + (isLast ? ' active' : '');
+    row.innerHTML = `
       <div class="sum-color-bar" style="background:${color}"></div>
       <div class="sum-inner">
         <span class="sum-odd" style="color:${color}">${odd}</span>
-        <span class="sum-arrow">${i===1?'=':'+  ='}</span>
-        <span class="sum-running" style="color:${isLast?color:'var(--text3)'}">${running}</span>
+        <span class="sum-arrow">${i===1 ? '=' : '+ ='}</span>
+        <span class="sum-running" style="color:${isLast?color:'var(--ink3)'}">${running}</span>
       </div>
       <span class="sum-n">${i}²</span>`;
     list.appendChild(row);
   }
-  list.scrollTop=list.scrollHeight;
+  list.scrollTop = list.scrollHeight;
 }
 
 function updateFormula(){
-  const parts=[];
-  for(let i=1;i<=n;i++) parts.push(2*i-1);
-  document.getElementById('fMain').textContent=`${parts.join(' + ')} = ${n}² = ${n*n}`;
-  document.getElementById('fSub').textContent=`Sum of first ${n} odd number${n!==1?'s':''} = ${n}²`;
-  document.getElementById('btnBack').disabled=n<=1;
-  document.getElementById('btnAdd').disabled=n>=12;
+  const parts = Array.from({length:n}, (_,i) => 2*i+1);
+  document.getElementById('fMain').textContent = `${parts.join(' + ')} = ${n}² = ${n*n}`;
+  document.getElementById('fSub').textContent  = `Sum of first ${n} odd number${n!==1?'s':''} = ${n*n}`;
+  document.getElementById('btnBack').disabled  = n <= 1;
+  document.getElementById('btnAdd').disabled   = n >= 12;
 }
 
-function changeN(d){n=Math.max(1,Math.min(12,n+d));drawGrid();buildSumList();updateFormula();}
-function resetBuild(){n=1;drawGrid();buildSumList();updateFormula();}
+document.getElementById('btnAdd').addEventListener('click',   () => { n = Math.min(12, n+1); drawGrid(); buildSumList(); updateFormula(); });
+document.getElementById('btnBack').addEventListener('click',  () => { n = Math.max(1,  n-1); drawGrid(); buildSumList(); updateFormula(); });
+document.getElementById('btnReset').addEventListener('click', () => { n = 1; drawGrid(); buildSumList(); updateFormula(); });
 
-function runTest(){
-  const num=parseInt(document.getElementById('testIn').value)||1;
-  const list=document.getElementById('stepsList');
-  list.innerHTML='';
-  let rem=num,odd=1;
-  const steps=[];
-  while(rem>0){
-    const next=rem-odd;
-    steps.push({odd,prev:rem,next:Math.max(next,0),over:next<0});
-    if(next<=0) break;
-    rem=next; odd+=2;
+drawGrid(); buildSumList(); updateFormula();
+
+// ══════════════════════════════════════════════════════
+// TEST TAB — interactive subtraction game
+// ══════════════════════════════════════════════════════
+let gameState = null; // {target, current, oddIdx, stepsDone:[]}
+
+function startGame(){
+  const val = parseInt(document.getElementById('testIn').value);
+  if(!val || val < 1) return;
+
+  gameState = {
+    target:  val,
+    current: val,
+    oddIdx:  1,      // next odd to subtract = 2*oddIdx - 1
+    stepsDone: [],   // {odd, from, to, correct:true}
+  };
+
+  renderGame();
+  // Focus input after render
+  setTimeout(()=>{ const inp=document.getElementById('answerInput'); if(inp) inp.focus(); }, 50);
+}
+
+function renderGame(){
+  const area = document.getElementById('gameArea');
+  area.innerHTML = '';
+
+  if(!gameState){ area.innerHTML = '<div class="empty-state" id="emptyState">Pick a number and press Start to begin.</div>'; return; }
+
+  const { current, oddIdx, stepsDone, target } = gameState;
+  const nextOdd = 2 * oddIdx - 1;
+
+  // ── Completed steps ──
+  if(stepsDone.length > 0){
+    const doneList = document.createElement('div');
+    doneList.className = 'steps-done';
+    stepsDone.forEach(s => {
+      const el = document.createElement('div');
+      el.className = 'step-done correct';
+      el.innerHTML = `
+        <span class="sd-eq">${s.from} − ${s.odd} = ${s.to}</span>
+        <span class="sd-tag">Step ${s.step}</span>
+      `;
+      doneList.appendChild(el);
+    });
+    area.appendChild(doneList);
   }
-  const isSquare=steps[steps.length-1].next===0&&!steps[steps.length-1].over;
-  steps.forEach(s=>{
-    const div=document.createElement('div');
-    div.className='step-card '+(s.over?'over':'ok');
-    div.innerHTML=`<span>${s.prev}</span><span style="opacity:.5">−</span><span>${s.odd}</span><span style="opacity:.4">=</span><span>${s.next}</span><span class="sc-note">${s.over?'overshot!':s.next===0?'reached 0':'continue'}</span>`;
-    list.appendChild(div);
+
+  // ── Check if done ──
+  if(current === 0){
+    // Perfect square!
+    const root = oddIdx - 1; // we subtracted oddIdx-1 odds
+    const res  = document.createElement('div');
+    res.className = 'result-card perfect';
+    res.innerHTML = `
+      <div class="rc-icon">✓</div>
+      <div class="rc-title">${target} is a perfect square!</div>
+      <div class="rc-body">
+        You subtracted <strong>${root} consecutive odd numbers</strong> and landed exactly on 0.<br>
+        That means <strong>${target} = ${root}²</strong>.
+      </div>
+      <button class="try-again-btn" id="tryAgain">Try another number</button>
+    `;
+    area.appendChild(res);
+    document.getElementById('tryAgain').addEventListener('click', () => { gameState=null; renderGame(); });
+    return;
+  }
+
+  // Would the next subtraction overshoot?
+  if(current - nextOdd < 0){
+    const res = document.createElement('div');
+    res.className = 'result-card not-square';
+    res.innerHTML = `
+      <div class="rc-icon">✗</div>
+      <div class="rc-title">${target} is not a perfect square</div>
+      <div class="rc-body">
+        The next odd to subtract is <strong>${nextOdd}</strong>, but only <strong>${current}</strong> remains.<br>
+        ${nextOdd} > ${current}, so we overshoot 0 — the number can't be built from consecutive odds.
+      </div>
+      <button class="try-again-btn" id="tryAgain">Try another number</button>
+    `;
+    area.appendChild(res);
+    document.getElementById('tryAgain').addEventListener('click', () => { gameState=null; renderGame(); });
+    return;
+  }
+
+  // ── Active input row ──
+  const activeRow = document.createElement('div');
+  activeRow.className = 'active-row';
+  activeRow.innerHTML = `
+    <div class="active-prompt">
+      <span class="ap-num">${current}</span>
+      <span class="ap-minus">−</span>
+      <span class="ap-odd">${nextOdd}</span>
+      <span class="ap-eq">=</span>
+      <span class="ap-step-label">Step ${oddIdx} · odd #${oddIdx}</span>
+    </div>
+    <div class="answer-row">
+      <input type="number" class="answer-input" id="answerInput"
+        placeholder="?" autocomplete="off" min="0">
+      <button class="check-btn" id="checkBtn">Check</button>
+    </div>
+    <div class="hint-text" id="hintText">Type your answer and press Check (or Enter)</div>
+  `;
+  area.appendChild(activeRow);
+
+  const inp  = document.getElementById('answerInput');
+  const hint = document.getElementById('hintText');
+
+  function checkAnswer(){
+    const userVal = parseInt(inp.value);
+    const correct = current - nextOdd;
+
+    if(isNaN(userVal)){
+      hint.textContent = 'Please enter a number first';
+      hint.className   = 'hint-text wrong-hint';
+      inp.focus();
+      return;
+    }
+
+    if(userVal === correct){
+      // Correct!
+      gameState.stepsDone.push({ step:oddIdx, odd:nextOdd, from:current, to:correct });
+      gameState.current = correct;
+      gameState.oddIdx  = oddIdx + 1;
+      renderGame();
+      setTimeout(()=>{ const i=document.getElementById('answerInput'); if(i) i.focus(); }, 30);
+    } else {
+      // Wrong — shake, show hint
+      inp.classList.remove('shake', 'wrong-border');
+      void inp.offsetWidth; // reflow to restart animation
+      inp.classList.add('shake', 'wrong-border');
+      const diff = userVal - correct;
+      if(Math.abs(diff) <= 2){
+        hint.textContent = diff > 0 ? 'A little too high — try again' : 'A little too low — try again';
+      } else {
+        hint.textContent = `Not quite — double-check: ${current} − ${nextOdd}`;
+      }
+      hint.className = 'hint-text wrong-hint';
+      inp.select();
+    }
+  }
+
+  document.getElementById('checkBtn').addEventListener('click', checkAnswer);
+  inp.addEventListener('keydown', e => { if(e.key==='Enter') checkAnswer(); });
+  inp.addEventListener('input', () => {
+    inp.classList.remove('wrong-border');
+    hint.textContent = 'Type your answer and press Check (or Enter)';
+    hint.className   = 'hint-text';
   });
-  const res=document.createElement('div');
-  if(isSquare){
-    const root=Math.round(Math.sqrt(num));
-    res.className='test-result yes';
-    res.textContent=`${num} is a perfect square — ${num} = ${root}²`;
-  } else {
-    res.className='test-result no';
-    res.textContent=`${num} is not a perfect square (overshot 0)`;
-  }
-  list.appendChild(res);
 }
 
-window.setAndTest=v=>{document.getElementById('testIn').value=v;runTest();};
+// Preset buttons
+document.querySelectorAll('.preset').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.getElementById('testIn').value = btn.dataset.n;
+  });
+});
 
-function switchTab(i){
-  ['t0','t1'].forEach((id,j)=>{document.getElementById(id).classList.toggle('active',j===i);document.getElementById('v'+j).style.display=j===i?'block':'none';});
-}
-
-drawGrid();buildSumList();updateFormula();
+document.getElementById('startBtn').addEventListener('click', startGame);
+document.getElementById('testIn').addEventListener('keydown', e => { if(e.key==='Enter') startGame(); });
 </script>
 </body>
 </html>
