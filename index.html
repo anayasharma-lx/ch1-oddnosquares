@@ -58,7 +58,7 @@ body::before{
 .tab-strip{display:flex;gap:0;background:var(--paper3);border:1px solid var(--rule2);border-radius:5px;overflow:hidden}
 .tab-btn{
   padding:6px 16px;border:none;background:transparent;
-  font-family:var(--mono);font-size:9px;letter-spacing:1px;text-transform:uppercase;
+  font-family:var(--mono);font-size:10px;letter-spacing:1px;text-transform:uppercase;
   color:var(--ink3);cursor:pointer;transition:all .15s;border-right:1px solid var(--rule2);
 }
 .tab-btn:last-child{border-right:none}
@@ -99,7 +99,7 @@ body::before{
 }
 .fb-main{font-family:var(--mono);font-size:12px;font-weight:700;color:var(--ink);word-break:break-all;line-height:1.5}
 .fb-main .curr-odd{color:var(--c0)}
-.fb-sub{font-family:var(--mono);font-size:9px;color:var(--ink3);margin-top:3px}
+.fb-sub{font-family:var(--mono);font-size:10px;color:var(--ink3);margin-top:3px}
 
 /* TEST pane */
 #test-pane{display:none;width:100%;height:100%;overflow-y:auto;padding:8px}
@@ -127,7 +127,7 @@ body::before{
   background:rgba(72,136,42,0.07);font-family:var(--mono);font-size:12px;
   color:#2a5818;
 }
-.sd-eq{flex:1}.sd-step{font-size:9px;opacity:.6;letter-spacing:.5px;text-transform:uppercase}
+.sd-eq{flex:1}.sd-step{font-size:10px;opacity:.6;letter-spacing:.5px;text-transform:uppercase}
 
 .active-card{
   background:var(--paper);border:2px solid var(--c0);border-radius:8px;
@@ -137,7 +137,7 @@ body::before{
 .ac-num{font-family:var(--mono);font-size:26px;font-weight:700;color:var(--ink)}
 .ac-op{font-family:var(--mono);font-size:20px;color:var(--ink3)}
 .ac-odd{font-family:var(--mono);font-size:26px;font-weight:700;color:var(--c0)}
-.ac-step{margin-left:auto;font-family:var(--mono);font-size:9px;color:var(--ink3);letter-spacing:.5px;text-transform:uppercase}
+.ac-step{margin-left:auto;font-family:var(--mono);font-size:10px;color:var(--ink3);letter-spacing:.5px;text-transform:uppercase}
 .ac-input-row{display:flex;gap:8px}
 .ac-input{
   flex:1;padding:8px 12px;border:2px solid var(--rule2);border-radius:6px;
@@ -186,11 +186,11 @@ body::before{
 .sum-arrow{font-family:var(--mono);font-size:11px;color:var(--ink3);margin:0 5px}
 .sum-running{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--ink3)}
 .sum-row.active .sum-running{color:var(--ink)}
-.sum-n{font-family:var(--mono);font-size:9px;color:var(--ink3);margin-left:auto}
+.sum-n{font-family:var(--mono);font-size:10px;color:var(--ink3);margin-left:auto}
 
 /* input for test tab side */
 .test-side{padding:4px 0}
-.ts-label{font-family:var(--mono);font-size:8px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink3);margin-bottom:8px}
+.ts-label{font-family:var(--mono);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink3);margin-bottom:8px}
 .ts-input{
   width:100%;padding:8px 12px;border:1.5px solid var(--rule2);border-radius:5px;
   font-family:var(--mono);font-size:22px;font-weight:700;text-align:center;
@@ -217,9 +217,47 @@ body::before{
   background:rgba(200,72,40,0.06);border:1px solid rgba(200,72,40,0.2);
 }
 .insight p{font-family:var(--serif);font-style:italic;font-size:12px;color:var(--ink2);line-height:1.7}
-.insight strong{font-style:normal;font-family:var(--sans);font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--c0)}
+.insight strong{font-style:normal;font-family:var(--sans);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--c0)}
 
 ::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--rule2);border-radius:2px}
+
+/* ══ MOBILE / TABLET ══════════════════════════════ */
+@media (max-width: 768px) {
+  html, body { overflow: auto; height: auto; }
+  #app { position: static; display: flex; flex-direction: column; min-height: 100dvh; }
+  #topbar { padding: 0 16px; height: auto; min-height: 48px; flex-wrap: wrap; gap: 8px; padding-top: 8px; padding-bottom: 8px; }
+  .tb-title { font-size: 17px; }
+  .tab-strip { order: 2; width: 100%; }
+  .tab-btn { flex: 1; text-align: center; padding: 7px 10px; font-size: 10px; }
+  #main { grid-template-columns: 1fr; overflow: visible; }
+  #canvas-zone {
+    min-height: 58vw; max-height: 420px; height: auto;
+    border-right: none; border-bottom: 1px solid var(--rule);
+    padding: 12px; flex-shrink: 0;
+  }
+  #build-pane { gap: 10px; }
+  #test-pane { height: auto; min-height: 300px; }
+  #side-panel { overflow: visible; }
+  .sp-scroll { overflow: visible; padding: 14px 14px 20px; }
+  .sum-list { max-height: 200px; overflow-y: auto; }
+  .build-controls { flex-wrap: wrap; justify-content: center; }
+  .build-btn { padding: 7px 12px; }
+  .formula-bar { padding: 8px 12px; }
+  .fb-main { font-size: 11px; }
+  .ac-num, .ac-odd { font-size: 22px; }
+  .ac-input { font-size: 20px; }
+  .ts-input { font-size: 20px; }
+  .concept-block p { font-size: 12px; }
+  .insight p { font-size: 11px; }
+}
+@media (max-width: 480px) {
+  .tb-title { font-size: 15px; }
+  .tab-btn { font-size: 9px; padding: 6px 8px; }
+  .ac-num, .ac-odd { font-size: 20px; }
+  .formula-bar { padding: 7px 10px; }
+  .fb-main { font-size: 10px; }
+}
+
 </style>
 </head>
 <body>
